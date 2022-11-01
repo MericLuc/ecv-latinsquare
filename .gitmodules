@@ -1,0 +1,3 @@
+[submodule "3rd/ecv"]
+	path = 3rd/ecv
+	url = git@github.com:MericLuc/ecv.git
