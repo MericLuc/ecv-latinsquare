@@ -29,6 +29,12 @@ public:
      */
     std::vector<std::string> data() const noexcept;
 
+    /*!
+     * \brief fromData fills the grid using custom data
+     * \param data the data to use
+     */
+    [[maybe_unused]] bool fromData(const std::vector<std::string>& data) noexcept;
+
 signals:
     /*!
      * \brief changed emitted when the grid changes

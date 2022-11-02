@@ -27,6 +27,8 @@ Grid::Grid(QWidget* parent) noexcept
 bool
 Grid::resize(const size_t& size) noexcept
 {
+    clear();
+
     _size = size;
     for (auto c : _cells)
         delete (c);
@@ -59,6 +61,8 @@ Grid::undo(void) noexcept
     const auto op{ _undone.back().reverse() };
     op.apply();
 
+    emit changed();
+
     return true;
 }
 
@@ -78,6 +82,8 @@ Grid::redo(void) noexcept
     const auto op{ _done.back().reverse() };
     op.apply();
 
+    emit changed();
+
     return true;
 }
 
@@ -95,15 +101,37 @@ Grid::data() const noexcept
 }
 
 /*****************************************************************************/
+bool
+Grid::fromData(const std::vector<std::string>& data) noexcept
+{
+    if (std::empty(data) || _size != std::size(data))
+        return false;
+
+    for (const auto& line : data)
+        if (_size != std::size(line))
+            return false;
+
+    _done.clear();
+    _undone.clear();
+
+    for (size_t i{ 0 }, k{ 0 }; i < _size; ++i)
+        for (size_t j{ 0 }; j < _size; ++j, ++k)
+            _cells[k]->set(data[i][j]);
+
+    return true;
+}
+
+/*****************************************************************************/
 void
 Grid::clear(void) noexcept
 {
-    // TODO
     for (auto c : _cells)
         c->set(0);
 
     _done.clear();
     _undone.clear();
+
+    emit changed();
 }
 
 /*****************************************************************************/
