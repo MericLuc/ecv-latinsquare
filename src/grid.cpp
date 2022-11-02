@@ -45,6 +45,7 @@ Grid::resize(const size_t& size) noexcept
             _cells.emplace_back(new Cell(i, j, size, this));
 
     for (auto& c : _cells) {
+        c->show();
         connect(c, SIGNAL(changed(Op)), this, SLOT(onCellChanged(Op)));
         connect(c, &Cell::hovered, []() { /* TODO */ });
     }
