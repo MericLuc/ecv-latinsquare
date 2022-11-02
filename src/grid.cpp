@@ -11,10 +11,15 @@
 // External headers
 #include <ecv.hpp>
 
+// TODO - remove
+#include <QDebug>
+
 /*****************************************************************************/
 Grid::Grid(QWidget* parent) noexcept
   : QWidget(parent)
 {
+    setFixedSize(500, 500);
+
     // TODO
     // Initialiser les cellules
     resize(_size);
@@ -27,6 +32,7 @@ Grid::Grid(QWidget* parent) noexcept
 bool
 Grid::resize(const size_t& size) noexcept
 {
+    qDebug() << "Grid size : " << this->size();
     clear();
 
     _size = size;
@@ -38,10 +44,13 @@ Grid::resize(const size_t& size) noexcept
 
     for (size_t i{ 0 }; i < _size; ++i)
         for (size_t j{ 0 }; j < _size; ++j)
-            _cells.emplace_back(new Cell(i, j, this));
+            _cells.emplace_back(new Cell(i, j, size, this));
 
-    for (auto& c : _cells)
+    for (auto& c : _cells) {
         connect(c, SIGNAL(changed(Op)), this, SLOT(onCellChanged(Op)));
+        connect(c, &Cell::hovered, []() { /* TODO */ });
+    }
+
     return true;
 }
 
@@ -53,7 +62,7 @@ Grid::undo(void) noexcept
         return false;
 
     _undone.emplace_back(_done.back());
-    _done.pop_front();
+    _done.pop_back();
 
     if (std::size(_undone) > max_hist_size)
         _undone.pop_front();
@@ -74,12 +83,12 @@ Grid::redo(void) noexcept
         return false;
 
     _done.emplace_back(_undone.back());
-    _undone.pop_front();
+    _undone.pop_back();
 
     if (std::size(_done) > max_hist_size)
         _done.pop_front();
 
-    const auto op{ _done.back().reverse() };
+    const auto op{ _done.back() };
     op.apply();
 
     emit changed();
@@ -91,11 +100,11 @@ Grid::redo(void) noexcept
 std::vector<std::string>
 Grid::data() const noexcept
 {
-    auto ret{ std::vector<std::string>(_size, std::string()) };
+    auto ret{ std::vector<std::string>(_size, std::string(_size, ' ')) };
 
     for (size_t i{ 0 }, k{ 0 }; i < _size; ++i)
         for (size_t j{ 0 }; j < _size; ++j, ++k)
-            ret[i].push_back(_cells[k]->get() + '0');
+            ret[i][j] = _cells[k]->get() + '0';
 
     return ret;
 }
@@ -116,7 +125,7 @@ Grid::fromData(const std::vector<std::string>& data) noexcept
 
     for (size_t i{ 0 }, k{ 0 }; i < _size; ++i)
         for (size_t j{ 0 }; j < _size; ++j, ++k)
-            _cells[k]->set(data[i][j]);
+            _cells[k]->set(data[i][j] - '0');
 
     return true;
 }
@@ -139,6 +148,7 @@ void
 Grid::onCellChanged(Op op)
 {
     _done.push_back(op);
+    _undone.clear();
 
     if (std::size(_done) > max_hist_size)
         _done.pop_front();

@@ -75,6 +75,10 @@ MainWindow::MainWindow(QWidget* parent)
                   "QPushButton#setupButton:pressed{background-color:#5cb300;}"
                   "QPushButton#setupButton:!enabled{background-color:rgb(200, 200, 200);}");
 
+    for (auto& button : { ui->undo_cb, ui->redo_cb })
+        button->setStyleSheet(
+          QString("border-top-right-radius:%1px;border-bottom-right-radius:%1px;").arg(3));
+
     // Connect to grid changes
     connect(ui->square_w, &Grid::changed, [this]() {
         if (ui->res_gb->isEnabled()) {
@@ -106,6 +110,8 @@ MainWindow::MainWindow(QWidget* parent)
         // Disable UI / Show wheel / Allow to cancel
 
         // Perform the ecv resolution
+        _sols.clear();
+        _model.reset(nullptr);
         _model = ecv::LatinSquares::generate(ui->square_w->data());
         if (nullptr == _model)
             return;
@@ -119,6 +125,7 @@ MainWindow::MainWindow(QWidget* parent)
             ui->res_label->setText(QString("Found %1 solutions (%2 ms)")
                                      .arg(std::size(_sols))
                                      .arg(watch.elapsed().count()));
+            ui->square_w->fromData(_model->apply(_sols[0]));
         }
     });
 }
