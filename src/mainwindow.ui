@@ -77,6 +77,9 @@
              <property name="accessibleDescription">
               <string extracomment="Grid widget"/>
              </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
             </widget>
            </item>
            <item row="1" column="2">
@@ -103,7 +106,6 @@
                <property name="font">
                 <font>
                  <family>Cantarell</family>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -116,7 +118,6 @@
               <widget class="QComboBox" name="size_cb">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -173,7 +174,6 @@
               <widget class="QPushButton" name="solve_pb">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -215,7 +215,6 @@
               <widget class="QPushButton" name="undo_cb">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -228,7 +227,6 @@
               <widget class="QPushButton" name="redo_cb">
                <property name="font">
                 <font>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -243,6 +241,9 @@
          </item>
          <item>
           <widget class="QGroupBox" name="res_gb">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="title">
             <string/>
            </property>
@@ -277,7 +278,6 @@
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>

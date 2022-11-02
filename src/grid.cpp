@@ -24,7 +24,6 @@ Grid::Grid(QWidget* parent) noexcept
     // Initialiser les cellules
     resize(_size);
 
-    // Faire les connexions nécessaires avec les cellules (si besoin)
     // Appliquer un style
 }
 
@@ -32,7 +31,6 @@ Grid::Grid(QWidget* parent) noexcept
 bool
 Grid::resize(const size_t& size) noexcept
 {
-    qDebug() << "Grid size : " << this->size();
     clear();
 
     _size = size;

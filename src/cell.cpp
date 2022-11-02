@@ -58,8 +58,7 @@ Cell::Cell(const size_t x, const size_t y, const size_t max_val, QWidget* parent
     QString style("background-color:#f1f2f3;border:1px solid #000000;");
     if ((0 == _x || max_val - 1 == _x) && (0 == _y || max_val - 1 == _y)) {
         style += QString("border-%1-%2-radius:%3px;")
-                   .arg(_x == 0 ? "top" : "bottom")
-                   .arg(_y == 0 ? "left" : "right")
+                   .arg(_x == 0 ? "top" : "bottom", _y == 0 ? "left" : "right")
                    .arg(cSize.width() / 5);
     }
     _bg->setFixedSize(cSize);

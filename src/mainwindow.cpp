@@ -88,8 +88,8 @@ MainWindow::MainWindow(QWidget* parent)
     });
 
     // Connect buttons with Grid
-    connect(ui->undo_cb, SIGNAL(clicked()), ui->square_w, SLOT(undo(void)));
-    connect(ui->redo_cb, SIGNAL(clicked()), ui->square_w, SLOT(redo(void)));
+    connect(ui->undo_cb, SIGNAL(clicked()), ui->square_w, SLOT(undo()));
+    connect(ui->redo_cb, SIGNAL(clicked()), ui->square_w, SLOT(redo()));
     connect(ui->size_cb, &QComboBox::currentTextChanged, [this]() {
         ui->square_w->resize(ui->size_cb->currentIndex() + 2);
     });
@@ -126,6 +126,8 @@ MainWindow::MainWindow(QWidget* parent)
                                      .arg(std::size(_sols))
                                      .arg(watch.elapsed().count()));
             ui->square_w->fromData(_model->apply(_sols[0]));
+        } else {
+            ui->res_label->setText("No solution");
         }
     });
 }
