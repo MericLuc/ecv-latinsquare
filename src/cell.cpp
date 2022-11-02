@@ -12,7 +12,6 @@
 
 // Qt headers
 #include <QDebug>
-#include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
 #include <QLabel>
 
@@ -33,12 +32,6 @@ Cell::Cell(const size_t x, const size_t y, const size_t max_val, QWidget* parent
 
     auto pSize{ parent->size() };
     auto cSize{ QSize(pSize.width() / _max_val, pSize.height() / _max_val) };
-
-    // Graphic drop shadow effect
-    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
-    shadow->setOffset(2, 2);
-    shadow->setBlurRadius(2);
-    setGraphicsEffect(shadow);
 
     // Position
     move(_y * cSize.width(), _x * cSize.height());
