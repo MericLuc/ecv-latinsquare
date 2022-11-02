@@ -94,6 +94,13 @@
             <layout class="QVBoxLayout" name="verticalLayout">
              <item>
               <widget class="QPushButton" name="new_pb">
+               <property name="font">
+                <font>
+                 <family>Cantarell</family>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>New</string>
                </property>
@@ -101,6 +108,15 @@
              </item>
              <item>
               <widget class="QComboBox" name="size_cb">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="currentIndex">
+                <number>3</number>
+               </property>
                <item>
                 <property name="text">
                  <string>2 x 2</string>
@@ -149,13 +165,24 @@
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
               <widget class="QPushButton" name="solve_pb">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Solve</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBox">
+              <widget class="QCheckBox" name="all_cb">
+               <property name="font">
+                <font>
+                 <italic>true</italic>
+                </font>
+               </property>
                <property name="text">
                 <string>All solutions</string>
                </property>
@@ -179,14 +206,26 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="undo_cb">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Undo</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="redo_cb">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Redo</string>
                </property>
@@ -212,6 +251,11 @@
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -224,6 +268,12 @@
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
                 </property>
                 <property name="text">
                  <string>Show another solution</string>
