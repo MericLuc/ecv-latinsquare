@@ -5,8 +5,8 @@
 
 #include "op.h"
 
-class QLabel;
 class DynamicFontSizeLabel;
+class QLabel;
 
 class Cell : public QWidget
 {

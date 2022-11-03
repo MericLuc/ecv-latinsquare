@@ -11,7 +11,7 @@
 #include "op.h"
 
 // Qt headers
-#include <QDebug>
+#include <QGraphicsDropShadowEffect>
 #include <QKeyEvent>
 #include <QLabel>
 
@@ -65,6 +65,16 @@ void
 Cell::enterEvent(QEvent*)
 {
     setFocus(Qt::FocusReason::OtherFocusReason);
+
+    auto lb_effect{ new QGraphicsDropShadowEffect() };
+
+    // Setup hovering effect on labeld
+    lb_effect->setOffset(.0);
+    lb_effect->setBlurRadius(20.0);
+    lb_effect->setColor(Qt::red);
+
+    _lb->setGraphicsEffect(lb_effect);
+
     emit hovered(true);
 }
 
@@ -72,6 +82,8 @@ Cell::enterEvent(QEvent*)
 void
 Cell::leaveEvent(QEvent*)
 {
+    _lb->setGraphicsEffect(nullptr);
+
     emit hovered(false);
 }
 
