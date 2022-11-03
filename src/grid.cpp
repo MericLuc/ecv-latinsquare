@@ -11,9 +11,6 @@
 // External headers
 #include <ecv.hpp>
 
-// TODO - remove
-#include <QDebug>
-
 /*****************************************************************************/
 Grid::Grid(QWidget* parent) noexcept
   : QWidget(parent)
