@@ -144,6 +144,7 @@ MainWindow::MainWindow(QWidget* parent)
         std::uniform_int_distribution<std::mt19937::result_type> dist{ 1, std::size(_sols) - 1 };
 
         ui->square_w->fromData(_model->apply(_sols[dist(rng)]));
+        ui->centralwidget->repaint();
     });
     connect(ui->solve_pb, &QPushButton::clicked, this, [this]() {
         ui->centralwidget->setGraphicsEffect(new QGraphicsBlurEffect);
